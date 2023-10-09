@@ -19,16 +19,34 @@ type Buttons struct {
 }
 
 type Keyboard struct {
-	Menu1 tele.ReplyMarkup
-	Menu2 tele.ReplyMarkup
-	Menu3 tele.ReplyMarkup
+	Menu1 *tele.ReplyMarkup
+	Menu2 *tele.ReplyMarkup
+	Menu3 *tele.ReplyMarkup
+}
+
+func(k *Keyboard) LoadCfgKeyboard() {
+	k.Menu1.Reply(
+		NewKeyboard().Menu1.Row(NewButton().Button1, NewButton().Button2),
+	)
+
+	k.Menu2.Reply(
+		NewKeyboard().Menu2.Row(NewButton().Button3, NewButton().Button4),
+		NewKeyboard().Menu2.Row(NewButton().Button5, NewButton().Button6),
+		NewKeyboard().Menu2.Row(NewButton().Button0),
+	)
+
+	k.Menu3.Reply(
+		NewKeyboard().Menu3.Row(NewButton().Button7, NewButton().Button8),
+		NewKeyboard().Menu3.Row(NewButton().Button9, NewButton().Button10),
+		NewKeyboard().Menu3.Row(NewButton().Button0),
+	)
 }
 
 func NewKeyboard() *Keyboard {
 	return &Keyboard{
-		Menu1: tele.ReplyMarkup{ResizeKeyboard: true},
-		Menu2: tele.ReplyMarkup{ResizeKeyboard: true},
-		Menu3: tele.ReplyMarkup{ResizeKeyboard: true},
+		Menu1: &tele.ReplyMarkup{ResizeKeyboard: true},
+		Menu2: &tele.ReplyMarkup{ResizeKeyboard: true},
+		Menu3: &tele.ReplyMarkup{ResizeKeyboard: true},
 	}
 }
 
